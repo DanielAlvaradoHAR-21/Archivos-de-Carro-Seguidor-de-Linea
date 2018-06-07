@@ -1,0 +1,47 @@
+/*DECLARACIONES DE VARIBLES Y DISTRIBUSION DE PINES EN EL ARDUINO*/
+int motor_iz1 = 2;                                        // Pin 2 del arduino Motor Izquierdo Polo +
+int motor_iz2 = 3;                                        // Pin 3 del arduino Motor Izquierdo Polo -
+int motor_d1 = 4;                                         // Pin 4 del arduino Motor Derecho Polo +
+int motor_d2 = 5;                                         // Pin 5 del arduino Motor Derecho Polo -
+int sensor_iz = 12;                                       // Pin 12 del arduino asignado para el sensor Izquierdo
+int sensor_de = 11;                                       // Pin 11 del arduino asignado para el sensor Derecho
+
+void setup() {
+  pinMode(sensor_iz, INPUT);
+  pinMode(sensor_de, INPUT);
+  pinMode(motor_iz1, OUTPUT);
+  pinMode(motor_iz2, OUTPUT);
+  pinMode(motor_d1, OUTPUT);
+  pinMode(motor_d2, OUTPUT);  
+}
+
+void loop() {
+  /*CONDICION AVANZA LINEA RECTA*/
+  if(digitalRead(sensor_iz)==0 && digitalRead(sensor_de)==0){   // condicion que evalua los 2 sensores si se en cuentran en la linea negra, los moteres avanzan en linea recta
+    analogWrite(motor_iz1, 200);                                      // los motores avanzan con una velocidad de una señal analogica de 200
+    analogWrite(motor_iz2, 0);
+    analogWrite(motor_d1, 200);
+    analogWrite(motor_d2, 0);
+  }
+  /*CONDICION SENSOR IZQUIERDO FUERA DE LA LINEA NEGRA*/
+   if(digitalRead(sensor_iz)!=0 && digitalRead(sensor_de)==0){   // si el sensor de la derecha se encuentra en blanco y el otro en la linea negra
+      analogWrite(motor_iz1, 200);                                     // el mortor de la derecha avanzan
+      analogWrite(motor_iz2, 0);
+      analogWrite(motor_d1, 0);                                       // mientras que el otro permanece inerte para corregir el rumbo y vuelvan a andar en linea recta
+      analogWrite(motor_d2, 0);
+   }
+   /*CONDICION SENSOR DERECHO FUERA DE LA LINEA NEGRA*/
+   if(digitalRead(sensor_iz)==0 && digitalRead(sensor_de)!=0){   // si el sensor de la izquierda se encuentra en blanco y el de la derecha en la linea negra
+      analogWrite(motor_iz1, 0);                                       // el mortor de la izquierda avanzan
+      analogWrite(motor_iz2, 0);
+      analogWrite(motor_d1, 200);                                     // mientras que el otro permanece inerte para corregir el rumbo y vuelvan a andar en linea recta
+      analogWrite(motor_d2, 0);
+   }
+    /*CONDICION AMBOS SENSORES FUERA DE LINEA NEGRA*/
+   if(digitalRead(sensor_iz)!=0 && digitalRead(sensor_de)!=0){   // si la condicion de los sensores anterior no se cumple ambos motores se detienen
+      analogWrite(motor_iz1, 0);                                       // ambos motores se dentienen por medio de una señal analogica en 0
+      analogWrite(motor_iz2, 0);
+      analogWrite(motor_d1, 0);
+      analogWrite(motor_d2, 0);
+   }
+}
