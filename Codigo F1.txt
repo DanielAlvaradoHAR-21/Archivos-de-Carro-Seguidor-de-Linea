@@ -1,0 +1,76 @@
+int motor_iz1 = 2;                                        
+int motor_iz2 = 3;                                        
+int motor_d1 = 4;                                         
+int motor_d2 = 5;                                         
+int sensor_liz = 10;                                      
+int sensor_iz = 11;                                       
+int sensor_de = 12;                                       
+int sensor_lde = 13;                                      
+
+void setup() {
+  pinMode(sensor_iz, INPUT);
+  pinMode(sensor_liz, INPUT);
+  pinMode(sensor_de, INPUT);
+  pinMode(sensor_lde, INPUT);
+  pinMode(motor_iz1, OUTPUT);
+  pinMode(motor_iz2, OUTPUT);
+  pinMode(motor_d1, OUTPUT);
+  pinMode(motor_d2, OUTPUT);
+}
+
+void loop() {  
+  if (digitalRead(sensor_liz) != 0 && digitalRead(sensor_iz) == 0 && digitalRead(sensor_de) == 0 && digitalRead(sensor_lde) != 0) { 
+    analogWrite(motor_iz1, 230);                                                                                            
+    analogWrite(motor_iz2, 0);
+    analogWrite(motor_d1, 230);
+    analogWrite(motor_d2, 0);
+  }    
+  if (digitalRead(sensor_liz) != 0 && digitalRead(sensor_iz) == 0 && digitalRead(sensor_de) != 0 && digitalRead(sensor_lde) != 0) { 
+    analogWrite(motor_iz1, 0);                                                                                                      
+    analogWrite(motor_iz2, 110);                                                                                                    
+    analogWrite(motor_d1, 190);
+    analogWrite(motor_d2, 0);
+  }  
+  if (digitalRead(sensor_liz) != 0 && digitalRead(sensor_iz) !=0 && digitalRead(sensor_de) == 0 && digitalRead(sensor_lde) !=0) {   
+    analogWrite(motor_iz1, 190);                                                                                                    
+    analogWrite(motor_iz2, 0);                                                                                                      
+    analogWrite(motor_d1, 0);
+    analogWrite(motor_d2, 110);
+  }  
+  if (digitalRead(sensor_liz) != 0 && digitalRead(sensor_iz) != 0 && digitalRead(sensor_de) == 0 && digitalRead(sensor_lde) == 0) { 
+    analogWrite(motor_iz1, 190);                                                                                            
+    analogWrite(motor_iz2, 0);
+    analogWrite(motor_d1, 130);                                                                                              
+    analogWrite(motor_d2, 0);
+  }  
+  if (digitalRead(sensor_liz) == 0 && digitalRead(sensor_iz) == 0 && digitalRead(sensor_de) != 0 && digitalRead(sensor_lde) != 0) { 
+    analogWrite(motor_iz1, 130);                                                                                                    
+    analogWrite(motor_iz2, 0);
+    analogWrite(motor_d1, 190);                                                                                                     
+    analogWrite(motor_d2, 0);
+  }  
+  if (digitalRead(sensor_liz) != 0 && digitalRead(sensor_iz) != 0 && digitalRead(sensor_de) != 0 && digitalRead(sensor_lde) != 0) { 
+    analogWrite(motor_iz1, 0);                                                                                                      
+    analogWrite(motor_iz2, 200);
+    analogWrite(motor_d1, 0);
+    analogWrite(motor_d2, 200);
+  }  
+  if (digitalRead(sensor_liz) == 0 && digitalRead(sensor_iz) == 0 && digitalRead(sensor_de) == 0 && digitalRead(sensor_lde) == 0) { 
+    analogWrite(motor_iz1, 250);                                                                                                    
+    analogWrite(motor_iz2, 0);
+    analogWrite(motor_d1, 250);
+    analogWrite(motor_d2, 0);
+  }  
+  if (digitalRead(sensor_liz) == 0 && digitalRead(sensor_iz) != 0 && digitalRead(sensor_de) != 0 && digitalRead(sensor_lde) != 0) { 
+    analogWrite(motor_iz1, 120);                                                                                                    
+    analogWrite(motor_iz2, 0);                                                                                                      
+    analogWrite(motor_d1, 195);                                                                                                     
+    analogWrite(motor_d2, 0);                                                                                                       
+  }  
+  if (digitalRead(sensor_liz) != 0 && digitalRead(sensor_iz) != 0 && digitalRead(sensor_de) != 0 && digitalRead(sensor_lde) == 0) { 
+    analogWrite(motor_iz1, 195);                                                                                                    
+    analogWrite(motor_iz2, 0);                                                                                                      
+    analogWrite(motor_d1, 120);                                                                                                     
+    analogWrite(motor_d2, 0);                                                                                                       
+  }
+}
